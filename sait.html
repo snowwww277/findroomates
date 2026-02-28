@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>RoomMate Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #15803d;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .profile {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>RoomMate Finder</h1>
+    <p>Найди соседа в новом городе</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Добавить профиль</h2>
+        <input type="text" id="name" placeholder="Имя">
+        <input type="text" id="city" placeholder="Город">
+        <input type="number" id="budget" placeholder="Бюджет (₸)">
+        <select id="status">
+            <option value="Студент">Студент</option>
+            <option value="Работник">Работник</option>
+        </select>
+        <button onclick="addProfile()">Добавить</button>
+    </div>
+
+    <div class="card">
+        <h2>Список соседей</h2>
+        <div id="profiles"></div>
+    </div>
+
+</div>
+
+<script>
+    let profiles = [];
+
+    function addProfile() {
+        const name = document.getElementById("name").value;
+        const city = document.getElementById("city").value;
+        const budget = document.getElementById("budget").value;
+        const status = document.getElementById("status").value;
+
+        if (!name || !city || !budget) {
+            alert("Заполни все поля!");
+            return;
+        }
+
+        const profile = { name, city, budget, status };
+        profiles.push(profile);
+        displayProfiles();
+    }
+
+    function displayProfiles() {
+        const container = document.getElementById("profiles");
+        container.innerHTML = "";
+
+        profiles.forEach(p => {
+            container.innerHTML += `
+                <div class="profile">
+                    <strong>${p.name}</strong><br>
+                    Город: ${p.city}<br>
+                    Бюджет: ${p.budget} ₸<br>
+                    Статус: ${p.status}
+                </div>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>
