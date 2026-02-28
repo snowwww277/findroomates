@@ -1,127 +1,247 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>RoomMate Finder</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f6f9;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoomMate Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-        header {
-            background: #2563eb;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+<style>
+:root{
+--primary:#2563eb;
+--dark:#111827;
+--light:#f9fafb;
+--card:#ffffff;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 30px auto;
-        }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+body{
+font-family:'Inter',sans-serif;
+background:var(--light);
+color:#111827;
+}
 
-        button {
-            background: #16a34a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
 
-        button:hover {
-            background: #15803d;
-        }
+nav h2{font-weight:700;}
 
-        input, select {
-            padding: 8px;
-            margin: 5px 0;
-            width: 100%;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
+nav a{
+text-decoration:none;
+margin-left:20px;
+color:#111827;
+font-weight:600;
+}
 
-        .profile {
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-    </style>
+header{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+text-align:center;
+padding:100px 20px;
+}
+
+header h1{font-size:42px;margin-bottom:20px;}
+header p{font-size:18px;margin-bottom:30px;}
+
+.btn{
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:white;
+color:#2563eb;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{background:#e5e7eb;}
+
+.container{
+max-width:1100px;
+margin:80px auto;
+padding:0 20px;
+}
+
+.section-title{
+text-align:center;
+font-size:28px;
+margin-bottom:50px;
+font-weight:700;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.price-card{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,0.05);
+text-align:center;
+}
+
+.price{
+font-size:32px;
+font-weight:700;
+margin:20px 0;
+}
+
+.price-card button{
+background:var(--primary);
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.chat-box{
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.chat-messages{
+height:150px;
+overflow-y:auto;
+margin-bottom:10px;
+}
+
+.message{
+background:#f3f4f6;
+padding:8px 12px;
+border-radius:12px;
+margin-bottom:8px;
+}
+
+footer{
+margin-top:100px;
+padding:30px;
+text-align:center;
+background:#111827;
+color:white;
+}
+</style>
 </head>
+
 <body>
 
+<nav>
+<h2>RoomMate Finder</h2>
+<div>
+<a href="#">Главная</a>
+<a href="#features">Возможности</a>
+<a href="#pricing">Тарифы</a>
+</div>
+</nav>
+
 <header>
-    <h1>RoomMate Finder</h1>
-    <p>Найди соседа в новом городе</p>
+<h1>Найди соседа в новом городе</h1>
+<p>Для студентов и молодых специалистов</p>
+<button class="btn">Начать бесплатно</button>
 </header>
 
-<div class="container">
-
-    <div class="card">
-        <h2>Добавить профиль</h2>
-        <input type="text" id="name" placeholder="Имя">
-        <input type="text" id="city" placeholder="Город">
-        <input type="number" id="budget" placeholder="Бюджет (₸)">
-        <select id="status">
-            <option value="Студент">Студент</option>
-            <option value="Работник">Работник</option>
-        </select>
-        <button onclick="addProfile()">Добавить</button>
-    </div>
-
-    <div class="card">
-        <h2>Список соседей</h2>
-        <div id="profiles"></div>
-    </div>
-
+<div class="container" id="features">
+<h2 class="section-title">Возможности</h2>
+<div class="cards">
+<div class="card">🔎 Умный поиск по бюджету и городу</div>
+<div class="card">💬 Встроенный чат</div>
+<div class="card">⭐ Премиум-аккаунт</div>
+</div>
 </div>
 
+<div class="container">
+<h2 class="section-title">Регистрация</h2>
+<div class="card">
+<input type="text" placeholder="Имя" id="username">
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Пароль">
+<br><br>
+<button onclick="register()">Зарегистрироваться</button>
+</div>
+</div>
+
+<div class="container">
+<h2 class="section-title">Чат (демо)</h2>
+<div class="chat-box">
+<div class="chat-messages" id="chat"></div>
+<input type="text" id="msg" placeholder="Написать сообщение">
+<button onclick="sendMsg()">Отправить</button>
+</div>
+</div>
+
+<div class="container" id="pricing">
+<h2 class="section-title">Тарифы</h2>
+<div class="pricing">
+<div class="price-card">
+<h3>Бесплатный</h3>
+<div class="price">0 ₸</div>
+<p>До 5 объявлений</p>
+<p>Обычный поиск</p>
+</div>
+
+<div class="price-card">
+<h3>Premium ⭐</h3>
+<div class="price">2000 ₸ / мес</div>
+<p>Без ограничений</p>
+<p>Приоритет в поиске</p>
+<p>Значок Premium</p>
+<button>Купить</button>
+</div>
+</div>
+</div>
+
+<footer>
+© 2026 RoomMate Finder | Стартап Магжана 🚀
+</footer>
+
 <script>
-    let profiles = [];
+function register(){
+let name=document.getElementById("username").value;
+if(name===""){
+alert("Введите имя");
+}else{
+alert("Добро пожаловать, "+name+"!");
+}
+}
 
-    function addProfile() {
-        const name = document.getElementById("name").value;
-        const city = document.getElementById("city").value;
-        const budget = document.getElementById("budget").value;
-        const status = document.getElementById("status").value;
-
-        if (!name || !city || !budget) {
-            alert("Заполни все поля!");
-            return;
-        }
-
-        const profile = { name, city, budget, status };
-        profiles.push(profile);
-        displayProfiles();
-    }
-
-    function displayProfiles() {
-        const container = document.getElementById("profiles");
-        container.innerHTML = "";
-
-        profiles.forEach(p => {
-            container.innerHTML += `
-                <div class="profile">
-                    <strong>${p.name}</strong><br>
-                    Город: ${p.city}<br>
-                    Бюджет: ${p.budget} ₸<br>
-                    Статус: ${p.status}
-                </div>
-            `;
-        });
-    }
+function sendMsg(){
+let text=document.getElementById("msg").value;
+if(text==="") return;
+let chat=document.getElementById("chat");
+chat.innerHTML+=`<div class="message">${text}</div>`;
+document.getElementById("msg").value="";
+chat.scrollTop=chat.scrollHeight;
+}
 </script>
 
 </body>
